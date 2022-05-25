@@ -8,9 +8,9 @@ from django.core.files.base import ContentFile
 class Image(models.Model):
     image = models.ImageField(upload_to='images')
     
-    def save(self, color, position, *args, **kwargs):
-        x = image_editor(self.image, color, position,)
-        print(color, position)
+    def save(self, color, position, image_back, *args, **kwargs):
+        x = image_editor(self.image, color, position, image_back)
+        print(color, position, image_back)
         buffer = BytesIO()
         x.save(buffer, format='png')
         image_png = buffer.getvalue()

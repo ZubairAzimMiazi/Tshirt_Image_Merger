@@ -20,9 +20,7 @@ class index(View):
             return redirect('index')
 
         image = Image(image=image_front)
-        image.save(color=color, position=position)
+        image.save(color=color, position=position, image_back=image_back)
         return render(request, 'uploadimg/index.html', {
             'img_obj': image.image
         })
-
-    

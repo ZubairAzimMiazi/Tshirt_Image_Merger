@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>upload image</title>
+</head>
+<body>
+
+<!-- Pure html form -->
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <tr>
+    <th>
+      <label for="tshirt_color">T-Shirt color:</label>
+    </th>
+    <td>
+      <select id="tshirt_color" name="tshirt_color" required>
+        <option value="black" selected="selected">Black</option>
+        <option value="white" >White</option>
+        <option value="red">Red</option>
+      </select>
+    </td>
+  </tr>
+  <br>
+
+  <p>Where do you want to place the logo</p>
+  <input type="radio" id="chest" name="position" value="chest" checked="checked">
+  <label for="chest">Chest</label><br>
+  <input type="radio" id="pocket" name="position" value="pocket">
+  <label for="pocket">Pocket</label><br>
+  <br>
+
+  <label for="image_front">Front Image</label>
+  <input type="file" name="image_front" id="image_front"><br><br>
+  <label for="image_back">Back Image</label>
+  <input type="file" name="image_back" id="image_back"><br><br>
+  <button type="submit">Upload</button>
+</form>
+
+{% if img_obj %}
+  <img src="/media/{{ img_obj }}" alt="connect" style="max-height:300px">
+{% endif %}
+
+</body>
+</html>

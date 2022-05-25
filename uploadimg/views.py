@@ -22,5 +22,5 @@ class index(View):
         image = Image(image=image_front)
         image.save(color=color, position=position, image_back=image_back)
         return render(request, 'uploadimg/index.html', {
-            'img_obj': image.image
+            'img_obj': image.image , 'image_object_back':image_back
         })

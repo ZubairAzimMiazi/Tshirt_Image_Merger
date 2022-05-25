@@ -6,12 +6,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # cv2.imread('D:\\image_merge_project\\uploadimg\\templates\\shirt.jpg')
-def image_editor(logo, color, position):
+def image_editor(logo, color, position, image_back):
+    print(color)
+    print(position)
+    if (color=='red'):
+        img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/red_shirt.jpg'))
+    elif (color=='white'):
+        img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/white_shirt.jpg'))
+    else:
+        img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/black_shirt.jpg'))
 
-    img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/shirt.jpg'))
+    Image.open(logo).save("logo/logo_front.png")
+    if image_back:
+        Image.open(image_back).save("logo/logo_back.png")
 
-    Image.open(logo).save("logo/logo.jpg")
-    watermark = cv2.imread(str(BASE_DIR / 'logo/logo.jpg'))
+    watermark = cv2.imread(str(BASE_DIR / 'logo/logo_front.png'))
 
     percent_of_scaling = 50
     new_width = int(img.shape[1] * percent_of_scaling/100)
@@ -74,6 +83,8 @@ def image_editor(logo, color, position):
 
     result = cv2.addWeighted(roi, 1, resized_wm, 1, 0)
     resized_img[top_y:bottom_y, left_x:right_x] = result
+    filename = str(BASE_DIR / 'media/front.jpg')
+    cv2.imwrite(filename, resized_img)
     img = Image.fromarray(resized_img)
 
     return img

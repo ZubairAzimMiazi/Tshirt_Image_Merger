@@ -21,7 +21,7 @@
       <select id="tshirt_color" name="tshirt_color" required>
         <option value="black" selected="selected">Black</option>
         <option value="white" >White</option>
-        <option value="red">Red</option>
+        <option value="grey">Grey</option>
       </select>
     </td>
   </tr>
@@ -36,16 +36,21 @@
 
   <label for="image_front">Front Image</label>
   <input type="file" name="image_front" id="image_front"><br><br>
+  <button type="submit">Upload</button><br><br>
+  <img src="/media/Front.jpg" style="max-height:300px">
+  <br> <br>
   <label for="image_back">Back Image</label>
   <input type="file" name="image_back" id="image_back"><br><br>
-  <button type="submit">Upload</button>
-</form>
-
-{%if img_obj %}
-  <img src="/media/Front.jpg" style="max-height:300px">
-{% endif %}
-{% if image_object_back %}
+  <button type="submit">Upload</button><br> <br>
+  {% if img_back %}
   <img src="/media/back.jpg" alt="connect" style="max-height:300px">
+  {% endif %}
+</form>
+{%if img_front %}
+  <!img src="/media/Front.jpg" style="max-height:300px">
+{% endif %}
+{% if img_back %}
+  <!img src="/media/back.jpg" alt="connect" style="max-height:300px">
 {% endif %}
 
 </body>

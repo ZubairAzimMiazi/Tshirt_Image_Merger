@@ -2,6 +2,7 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from . models import Image
+from .utils import image_editor
 
 
 
@@ -16,11 +17,10 @@ class index(View):
         color = request.POST.get('tshirt_color')
         position = request.POST.get('position')
 
-        if not image_front:
+        if image_front == None and image_back == None:
             return redirect('index')
 
-        image = Image(image=image_front)
-        image.save(color=color, position=position, image_back=image_back)
+        x = image_editor(image_front, color, position, image_back)
         return render(request, 'uploadimg/index.html', {
-            'img_obj': image.image , 'image_object_back':image_back
+            'img_front': image_front , 'img_back':image_back
         })

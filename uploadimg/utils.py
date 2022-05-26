@@ -9,8 +9,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 def image_editor(logo, color, position, image_back):
     print(color)
     print(position)
-    if (color=='red'):
-        img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/red_shirt.jpg'))
+    if (color=='grey'):
+        img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/grey_shirt.jpg'))
     elif (color=='white'):
         img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/white_shirt.jpg'))
     else:
@@ -96,7 +96,6 @@ def image_editor(logo, color, position, image_back):
         else:
             Image.open(logo).save("logo/logo_front.png")
             pngimg = cv2.imread(str(BASE_DIR / 'logo/logo_front.png'))
-  
             cv2.imwrite('logo/logo_front.jpg', pngimg, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
     
             watermark = cv2.imread(str(BASE_DIR / 'logo/logo_front.jpg'))
@@ -113,13 +112,19 @@ def image_editor(logo, color, position, image_back):
             wm_dimension= (wm_w,wm_h)
             print(wm_dimension, "wm_dimension")
 
-            if wm_dimension < new_dim :
-                wm_scale = 50
+            if (wm_dimension < (450,599)) and (wm_h>wm_w) :
+                wm_scale = 20
                 wm_width = int(watermark.shape[1] * wm_scale/100)
                 wm_height = int(watermark.shape[0] * wm_scale/100)
                 wm_dim = (wm_width, wm_height)
                 resized_wm = cv2.resize(watermark, wm_dim, interpolation=cv2.INTER_AREA)
-            elif wm_dimension >(450,599) and  wm_dimension<(900,900):
+            if (wm_dimension < (450,599)) and (wm_w>wm_h) :
+                wm_scale = 40
+                wm_width = int(watermark.shape[1] * wm_scale/100)
+                wm_height = int(watermark.shape[0] * wm_scale/100)
+                wm_dim = (wm_width, wm_height)
+                resized_wm = cv2.resize(watermark, wm_dim, interpolation=cv2.INTER_AREA)
+            elif wm_dimension >=(450,599) and  wm_dimension<(900,900):
                 wm_scale = 20
                 wm_width = int(watermark.shape[1] * wm_scale/100)
                 wm_height = int(watermark.shape[0] * wm_scale/100)
@@ -138,13 +143,13 @@ def image_editor(logo, color, position, image_back):
                 wm_dim = (wm_width, wm_height)
                 resized_wm = cv2.resize(watermark, wm_dim, interpolation=cv2.INTER_AREA)
             elif wm_dimension>= (2400,2400):
-                wm_scale = 2
+                wm_scale = 4
                 wm_width = int(watermark.shape[1] * wm_scale/100)
                 wm_height = int(watermark.shape[0] * wm_scale/100)
                 wm_dim = (wm_width, wm_height)
                 resized_wm = cv2.resize(watermark, wm_dim, interpolation=cv2.INTER_AREA)
             else:
-                wm_scale = 2
+                wm_scale = 20
                 wm_width = int(watermark.shape[1] * wm_scale/100)
                 wm_height = int(watermark.shape[0] * wm_scale/100)
                 wm_dim = (wm_width, wm_height)
@@ -172,8 +177,8 @@ def image_editor(logo, color, position, image_back):
     if image_back:
         Image.open(image_back).save("logo/logo_back.png")
 
-        if (color=='red'):
-            img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/red_shirt_back.jpg'))
+        if (color=='grey'):
+            img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/grey_shirt_back.jpg'))
         elif (color=='white'):
             img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/white_shirt_back.jpg'))
         else:

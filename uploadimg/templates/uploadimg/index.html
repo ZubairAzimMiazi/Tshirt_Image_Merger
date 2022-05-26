@@ -41,7 +41,9 @@
   <button type="submit">Upload</button>
 </form>
 
-<img src="/media/front.jpg" style="max-height:300px">
+{%if img_obj %}
+  <img src="/media/Front.jpg" style="max-height:300px">
+{% endif %}
 {% if image_object_back %}
   <img src="/media/back.jpg" alt="connect" style="max-height:300px">
 {% endif %}

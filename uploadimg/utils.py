@@ -20,11 +20,11 @@ def image_editor(logo, color, position, image_back):
         #### If pocket size has been choosen ####
         if (position=='pocket'):
             Image.open(logo).save("logo/logo_front.png")
-            pngimg = cv2.imread(str(BASE_DIR / 'logo/logo_front.png'))
+            #pngimg = cv2.imread(str(BASE_DIR / 'logo/logo_front.png'))
   
-            cv2.imwrite('logo/logo_front.jpg', pngimg, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+            #cv2.imwrite('logo/logo_front.jpg', pngimg, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
     
-            watermark = cv2.imread(str(BASE_DIR / 'logo/logo_front.jpg'))
+            watermark = cv2.imread(str(BASE_DIR / 'logo/logo_front.png'))
 
             percent_of_scaling = 50
             new_width = int(img.shape[1] * percent_of_scaling/100)
